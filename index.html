@@ -1,88 +1,119 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🦛 Курси валют з бегемотиком</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🦛 Premium Exchange</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
 </head>
 <body>
-    <!-- 3D Бегемотик (ліворуч) -->
-    <div id="hippo-container"></div>
-
-    <!-- Основний контент (праворуч) -->
-    <div class="content">
-        <div class="header">
-            <h1>💰 Курси валют</h1>
-            <div class="update-status">
-                <span id="update-indicator" class="indicator idle"></span>
-                <span id="update-time">--:--:--</span>
+    <!-- Ліва частина: Бегемотик + брендинг -->
+    <div class="left-panel">
+        <div class="brand">
+            <span class="brand-icon">🦛</span>
+            <span class="brand-name">Premium<span>Exchange</span></span>
+        </div>
+        <div class="hippo-wrapper">
+            <canvas id="hippoCanvas"></canvas>
+            <div class="hippo-caption">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Синхронізація...</span>
             </div>
         </div>
-        
-        <div class="currency-cards">
-            <!-- USD -->
-            <div class="currency-card" data-currency="USD">
-                <div class="currency-header">
-                    <span class="currency-flag">🇺🇸</span>
-                    <span class="currency-name">Долар США</span>
-                </div>
-                <div class="rate-row">
-                    <span class="rate-label">Купівля</span>
-                    <span class="currency-rate" id="usd-buy">--</span>
-                </div>
-                <div class="rate-row">
-                    <span class="rate-label">Продаж</span>
-                    <span class="currency-rate" id="usd-sell">--</span>
-                </div>
-                <div class="currency-change" id="usd-change">---</div>
-            </div>
-
-            <!-- EUR -->
-            <div class="currency-card" data-currency="EUR">
-                <div class="currency-header">
-                    <span class="currency-flag">🇪🇺</span>
-                    <span class="currency-name">Євро</span>
-                </div>
-                <div class="rate-row">
-                    <span class="rate-label">Купівля</span>
-                    <span class="currency-rate" id="eur-buy">--</span>
-                </div>
-                <div class="rate-row">
-                    <span class="rate-label">Продаж</span>
-                    <span class="currency-rate" id="eur-sell">--</span>
-                </div>
-                <div class="currency-change" id="eur-change">---</div>
-            </div>
-
-            <!-- PLN -->
-            <div class="currency-card" data-currency="PLN">
-                <div class="currency-header">
-                    <span class="currency-flag">🇵🇱</span>
-                    <span class="currency-name">Злотий</span>
-                </div>
-                <div class="rate-row">
-                    <span class="rate-label">Купівля</span>
-                    <span class="currency-rate" id="pln-buy">--</span>
-                </div>
-                <div class="rate-row">
-                    <span class="rate-label">Продаж</span>
-                    <span class="currency-rate" id="pln-sell">--</span>
-                </div>
-                <div class="currency-change" id="pln-change">---</div>
-            </div>
-        </div>
-
-        <div class="controls">
-            <button onclick="manualRefresh()" class="refresh-btn">🔄 Оновити зараз</button>
-            <span id="next-update">Наступне оновлення: 30с</span>
+        <div class="left-footer">
+            <span>Оновлено: <strong id="updateTime">--:--:--</strong></span>
+            <span id="countdownTimer">30с</span>
         </div>
     </div>
 
-    <!-- Бібліотеки для 3D -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    
+    <!-- Права частина: Курси -->
+    <div class="right-panel">
+        <div class="panel-header">
+            <h1>Курси валют</h1>
+            <p class="subtitle">Монобанк ⋅ live</p>
+            <button class="refresh-btn" onclick="manualRefresh()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+                </svg>
+                Оновити
+            </button>
+        </div>
+
+        <div class="currency-list">
+            <!-- USD -->
+            <div class="currency-item" data-currency="USD">
+                <div class="currency-info">
+                    <span class="flag">🇺🇸</span>
+                    <div>
+                        <div class="currency-name">USD</div>
+                        <div class="currency-full">Долар США</div>
+                    </div>
+                </div>
+                <div class="rates">
+                    <div class="rate-block">
+                        <span class="rate-label">Купівля</span>
+                        <span class="rate-value" id="usd-buy">—</span>
+                    </div>
+                    <div class="rate-block">
+                        <span class="rate-label">Продаж</span>
+                        <span class="rate-value" id="usd-sell">—</span>
+                    </div>
+                </div>
+                <div class="change-badge" id="usd-change">—</div>
+            </div>
+
+            <!-- EUR -->
+            <div class="currency-item" data-currency="EUR">
+                <div class="currency-info">
+                    <span class="flag">🇪🇺</span>
+                    <div>
+                        <div class="currency-name">EUR</div>
+                        <div class="currency-full">Євро</div>
+                    </div>
+                </div>
+                <div class="rates">
+                    <div class="rate-block">
+                        <span class="rate-label">Купівля</span>
+                        <span class="rate-value" id="eur-buy">—</span>
+                    </div>
+                    <div class="rate-block">
+                        <span class="rate-label">Продаж</span>
+                        <span class="rate-value" id="eur-sell">—</span>
+                    </div>
+                </div>
+                <div class="change-badge" id="eur-change">—</div>
+            </div>
+
+            <!-- PLN -->
+            <div class="currency-item" data-currency="PLN">
+                <div class="currency-info">
+                    <span class="flag">🇵🇱</span>
+                    <div>
+                        <div class="currency-name">PLN</div>
+                        <div class="currency-full">Злотий</div>
+                    </div>
+                </div>
+                <div class="rates">
+                    <div class="rate-block">
+                        <span class="rate-label">Купівля</span>
+                        <span class="rate-value" id="pln-buy">—</span>
+                    </div>
+                    <div class="rate-block">
+                        <span class="rate-label">Продаж</span>
+                        <span class="rate-value" id="pln-sell">—</span>
+                    </div>
+                </div>
+                <div class="change-badge" id="pln-change">—</div>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <span>Дані оновлюються автоматично кожні 30с</span>
+            <span class="status-indicator" id="liveIndicator">● LIVE</span>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
