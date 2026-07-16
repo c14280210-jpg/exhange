@@ -7,36 +7,68 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 3D Бегемотик -->
+    <!-- 3D Бегемотик (ліворуч) -->
     <div id="hippo-container"></div>
 
-    <!-- Основний контент -->
+    <!-- Основний контент (праворуч) -->
     <div class="content">
-        <h1>💰 Курси валют</h1>
-        <div class="update-status">
-            <span id="update-indicator" class="indicator idle"></span>
-            <span id="update-time">Оновлено: --:--:--</span>
+        <div class="header">
+            <h1>💰 Курси валют</h1>
+            <div class="update-status">
+                <span id="update-indicator" class="indicator idle"></span>
+                <span id="update-time">--:--:--</span>
+            </div>
         </div>
         
         <div class="currency-cards">
+            <!-- USD -->
             <div class="currency-card" data-currency="USD">
-                <div class="currency-flag">🇺🇸</div>
-                <div class="currency-name">Долар США</div>
-                <div class="currency-rate" id="usd-rate">--</div>
+                <div class="currency-header">
+                    <span class="currency-flag">🇺🇸</span>
+                    <span class="currency-name">Долар США</span>
+                </div>
+                <div class="rate-row">
+                    <span class="rate-label">Купівля</span>
+                    <span class="currency-rate" id="usd-buy">--</span>
+                </div>
+                <div class="rate-row">
+                    <span class="rate-label">Продаж</span>
+                    <span class="currency-rate" id="usd-sell">--</span>
+                </div>
                 <div class="currency-change" id="usd-change">---</div>
             </div>
 
+            <!-- EUR -->
             <div class="currency-card" data-currency="EUR">
-                <div class="currency-flag">🇪🇺</div>
-                <div class="currency-name">Євро</div>
-                <div class="currency-rate" id="eur-rate">--</div>
+                <div class="currency-header">
+                    <span class="currency-flag">🇪🇺</span>
+                    <span class="currency-name">Євро</span>
+                </div>
+                <div class="rate-row">
+                    <span class="rate-label">Купівля</span>
+                    <span class="currency-rate" id="eur-buy">--</span>
+                </div>
+                <div class="rate-row">
+                    <span class="rate-label">Продаж</span>
+                    <span class="currency-rate" id="eur-sell">--</span>
+                </div>
                 <div class="currency-change" id="eur-change">---</div>
             </div>
 
+            <!-- PLN -->
             <div class="currency-card" data-currency="PLN">
-                <div class="currency-flag">🇵🇱</div>
-                <div class="currency-name">Злотий</div>
-                <div class="currency-rate" id="pln-rate">--</div>
+                <div class="currency-header">
+                    <span class="currency-flag">🇵🇱</span>
+                    <span class="currency-name">Злотий</span>
+                </div>
+                <div class="rate-row">
+                    <span class="rate-label">Купівля</span>
+                    <span class="currency-rate" id="pln-buy">--</span>
+                </div>
+                <div class="rate-row">
+                    <span class="rate-label">Продаж</span>
+                    <span class="currency-rate" id="pln-sell">--</span>
+                </div>
                 <div class="currency-change" id="pln-change">---</div>
             </div>
         </div>
@@ -51,7 +83,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     
-    <!-- Головний скрипт -->
     <script src="script.js"></script>
 </body>
 </html>
