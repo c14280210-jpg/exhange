@@ -13,7 +13,7 @@ body {
     overflow: hidden;
 }
 
-/* ===== ЛІВА ПАНЕЛЬ (бегемотик) ===== */
+/* ===== ЛІВА ПАНЕЛЬ ===== */
 .left-panel {
     width: 45%;
     height: 100vh;
@@ -22,8 +22,8 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding: 2.5rem 2rem 2rem;
-    position: relative;
     border-right: 1px solid rgba(255, 255, 255, 0.04);
+    position: relative;
     overflow: hidden;
 }
 
@@ -34,7 +34,7 @@ body {
     right: -20%;
     width: 80%;
     height: 80%;
-    background: radial-gradient(ellipse, rgba(247, 151, 30, 0.06) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(247, 151, 30, 0.05) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -67,16 +67,14 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
     z-index: 1;
 }
 
 #hippoCanvas {
     width: 100%;
-    max-width: 420px;
+    max-width: 350px;
     height: auto;
     aspect-ratio: 1/1;
-    image-rendering: crisp-edges;
 }
 
 .hippo-caption {
@@ -86,7 +84,6 @@ body {
     margin-top: 0.5rem;
     font-size: 0.8rem;
     color: #888;
-    letter-spacing: 0.3px;
 }
 
 .status-dot {
@@ -94,7 +91,6 @@ body {
     height: 8px;
     border-radius: 50%;
     display: inline-block;
-    transition: all 0.3s ease;
 }
 
 .status-dot.idle {
@@ -102,14 +98,9 @@ body {
     box-shadow: 0 0 12px rgba(74, 222, 128, 0.3);
 }
 
-.status-dot.loading {
+.status-dot.saving {
     background: #fbbf24;
-    animation: pulse-dot 0.8s ease-in-out infinite;
-}
-
-.status-dot.error {
-    background: #f87171;
-    box-shadow: 0 0 12px rgba(248, 113, 113, 0.3);
+    animation: pulse-dot 0.6s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
@@ -122,24 +113,16 @@ body {
     justify-content: space-between;
     font-size: 0.75rem;
     color: #555;
-    letter-spacing: 0.3px;
-    z-index: 1;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     padding-top: 1rem;
+    z-index: 1;
 }
 
 .left-footer strong {
     color: #aaa;
-    font-weight: 600;
 }
 
-#countdownTimer {
-    font-variant-numeric: tabular-nums;
-    color: #f7971e;
-    font-weight: 600;
-}
-
-/* ===== ПРАВА ПАНЕЛЬ (курси) ===== */
+/* ===== ПРАВА ПАНЕЛЬ ===== */
 .right-panel {
     width: 55%;
     height: 100vh;
@@ -154,13 +137,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     flex-wrap: wrap;
     gap: 1rem;
 }
 
 .panel-header h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 800;
     letter-spacing: -1px;
     background: linear-gradient(135deg, #fff 30%, #f7971e 100%);
@@ -170,44 +153,32 @@ body {
 }
 
 .subtitle {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: #555;
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-top: -0.2rem;
 }
 
 .refresh-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #ccc;
-    padding: 0.5rem 1.2rem;
+    background: linear-gradient(135deg, #f7971e, #e68a00);
+    border: none;
+    color: #fff;
+    padding: 0.6rem 1.5rem;
     border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: inherit;
+    box-shadow: 0 4px 20px rgba(247, 151, 30, 0.25);
 }
 
 .refresh-btn:hover {
-    background: rgba(247, 151, 30, 0.15);
-    border-color: rgba(247, 151, 30, 0.3);
-    color: #fff;
-    transform: scale(1.02);
-}
-
-.refresh-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.refresh-btn svg {
-    flex-shrink: 0;
+    transform: scale(1.03);
+    box-shadow: 0 6px 30px rgba(247, 151, 30, 0.35);
 }
 
 /* ===== КАРТКИ ВАЛЮТ ===== */
@@ -234,7 +205,6 @@ body {
 .currency-item:hover {
     background: rgba(255, 255, 255, 0.06);
     border-color: rgba(255, 255, 255, 0.08);
-    transform: translateX(4px);
 }
 
 .currency-info {
@@ -251,11 +221,10 @@ body {
 .currency-name {
     font-size: 1rem;
     font-weight: 700;
-    letter-spacing: -0.3px;
 }
 
 .currency-full {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: #555;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -263,7 +232,7 @@ body {
 
 .rates {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .rate-block {
@@ -273,30 +242,37 @@ body {
 }
 
 .rate-label {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     text-transform: uppercase;
     color: #555;
     letter-spacing: 0.8px;
 }
 
-.rate-value {
-    font-size: 1.4rem;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.3px;
-    transition: all 0.3s ease;
-    min-width: 70px;
+.rate-input {
+    width: 90px;
+    padding: 0.4rem 0.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: inherit;
     text-align: center;
+    transition: all 0.3s ease;
+    font-variant-numeric: tabular-nums;
 }
 
-.rate-value.updating {
-    animation: rate-flash 0.5s ease;
+.rate-input:focus {
+    outline: none;
+    border-color: #f7971e;
+    background: rgba(247, 151, 30, 0.05);
+    box-shadow: 0 0 20px rgba(247, 151, 30, 0.05);
 }
 
-@keyframes rate-flash {
-    0% { color: #f7971e; transform: scale(1); }
-    50% { color: #ffd700; transform: scale(1.08); }
-    100% { color: inherit; transform: scale(1); }
+.rate-input::placeholder {
+    color: #333;
+    font-weight: 400;
 }
 
 .change-badge {
@@ -307,30 +283,10 @@ body {
     min-width: 60px;
     text-align: center;
     background: rgba(255, 255, 255, 0.04);
-    transition: all 0.3s ease;
+    color: #555;
 }
 
-.change-badge.up {
-    color: #4ade80;
-    background: rgba(74, 222, 128, 0.12);
-}
-
-.change-badge.down {
-    color: #f87171;
-    background: rgba(248, 113, 113, 0.12);
-}
-
-.change-badge.neutral {
-    color: #fbbf24;
-    background: rgba(251, 191, 36, 0.10);
-}
-
-.change-badge.unavailable {
-    color: #444;
-    background: rgba(255, 255, 255, 0.02);
-}
-
-/* ===== ПАНЕЛЬ ФУТЕР ===== */
+/* ===== ФУТЕР ===== */
 .panel-footer {
     display: flex;
     justify-content: space-between;
@@ -339,42 +295,35 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     font-size: 0.7rem;
     color: #444;
-    letter-spacing: 0.3px;
 }
 
 .status-indicator {
-    color: #4ade80;
+    color: #fbbf24;
     font-weight: 700;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 1.5px;
-    animation: blink-live 2s ease-in-out infinite;
 }
 
-@keyframes blink-live {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-/* ===== АДАПТИВНІСТЬ ===== */
+/* ===== АДАПТИВ ===== */
 @media (max-width: 1024px) {
     .left-panel { width: 40%; padding: 1.5rem; }
     .right-panel { width: 60%; padding: 1.5rem; }
     .rates { gap: 1rem; }
-    .rate-value { font-size: 1.1rem; min-width: 55px; }
+    .rate-input { width: 70px; font-size: 0.95rem; }
 }
 
 @media (max-width: 768px) {
     body { flex-direction: column; overflow-y: auto; }
     .left-panel {
         width: 100%;
-        height: 45vh;
+        height: 40vh;
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         padding: 1.2rem;
     }
     .right-panel {
         width: 100%;
-        height: 55vh;
+        height: 60vh;
         padding: 1.2rem;
     }
     #hippoCanvas { max-width: 200px; }
