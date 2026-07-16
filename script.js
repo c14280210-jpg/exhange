@@ -475,4 +475,49 @@ function gsapTo(obj, target, duration) {
     const targetY = target.y !== undefined ? target.y : startY;
     const targetRotX = target.rotation?.x !== undefined ? target.rotation.x : startRotX;
     const targetRotY = target.rotation?.y !== undefined ? target.rotation.y : startRotY;
-   
+    const targetRotZ = target.rotation?.z !== undefined ? target.rotation.z : startRotZ;
+    
+    const startTime = Date.now();
+    const durationMs = duration * 1000;
+    
+    function animate() {
+        const elapsed = (Date.now() - startTime) / durationMs;
+        const progress = Math.min(elapsed, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        
+        if (obj.position) {
+            obj.position.y = startY + (targetY - startY) * ease;
+        }
+        if (obj.rotation) {
+            obj.rotation.x = startRotX + (targetRotX - startRotX) * ease;
+            obj.rotation.y = startRotY + (targetRotY - startRotY) * ease;
+            obj.rotation.z = startRotZ + (targetRotZ - startRotZ) * ease;
+        }
+        if (progress < 1) requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+// ===== 7. РЕНДЕРИНГ =====
+function renderLoop() {
+    if (hippo && currentAnimation === 'idle') {
+        const time = Date.now() / 2000;
+        hippo.position.y = Math.sin(time) * 0.02;
+        hippo.rotation.y += 0.003;
+        hippo.rotation.z = Math.sin(time * 0.7) * 0.008;
+    }
+    if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+    }
+    requestAnimationFrame(renderLoop);
+}
+
+// ===== 8. ЗАПУСК =====
+function init() {
+    initHippo();
+    renderLoop();
+    fetchRates();
+    startCountdown();
+}
+
+document.addEventListener('DOMContentLoaded', init);
